@@ -1,4 +1,4 @@
-% 初始化PsychtoolboxJJJJJFJFFJJFFJJFJJFJFFFJJJJFFFJJFFJFFFJFFFFJFJFFFFJJFFJFFJFFFJJFJFFFJJFJJJ
+% 初始化Psychtoolbox
 clear;
 clc;
 AssertOpenGL; % 检查 Psychtoolbox 是否正常运行
@@ -49,8 +49,8 @@ targetDirection = Shuffle(repmat([0 1], 1, nTrials/2)); % 目标箭头朝向，0
 flankerCongruency = Shuffle(repmat([0 1], 1, nTrials/2)); % 其他箭头是否与目标箭头一致，0为不一致，1为一致，随机打乱顺序
 
 % 创建数据文件(原始数据保存到文件模块1/3)
-%dataFile = fopen('lateral_inhibition_data.txt', 'w'); % 打开一个文本文件，用于保存数据
-%fprintf(dataFile, 'Trial\tCongruency\tTarget\tResponse\tAccuracy\tRT\n'); % 写入表头
+dataFile = fopen('dataArri.csv', 'w'); % 打开一个文本文件，用于保存数据
+fprintf(dataFile, 'Trial\tCongruency\tTarget\tResponse\tAccuracy\tRT\n'); % 写入表头
 
 % 显示指导语
 Screen('TextSize', window, 40); % 设置字号
@@ -148,7 +148,7 @@ for i = 1:nTrials % 对每个试次进行循环
     end
     
     % 把本次试次的数据写入文件(原始数据保存到文件模块2/3)
-    %fprintf(dataFile, '%d\t%d\t%d\t%d\t%d\t%.3f\n', i, flankerCongruency(i), targetDirection(i), responseDirection, accuracy, rt); % 写入试次序号、箭头方向是否一致、目标箭头朝向、被试按键代表的朝向、被试反应是否正确、反应时
+    fprintf(dataFile, '%d\t%d\t%d\t%d\t%d\t%.3f\n', i, flankerCongruency(i), targetDirection(i), responseDirection, accuracy, rt); % 写入试次序号、箭头方向是否一致、目标箭头朝向、被试按键代表的朝向、被试反应是否正确、反应时
     % 把本次试次的数据写入变量
     dataArri(i).Trial = i;
     dataArri(i).Congruency = flankerCongruency(i);
@@ -175,7 +175,7 @@ for i = 1:nTrials % 对每个试次进行循环
 end
 
 % 关闭数据文件(原始数据保存到文件模块3/3)
-%fclose(dataFile); % 关闭文本文件
+fclose(dataFile); % 关闭文本文件
 
 % 显示结束语
 Screen('TextSize', window, 40); % 设置字号
