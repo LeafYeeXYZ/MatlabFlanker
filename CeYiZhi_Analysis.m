@@ -1,6 +1,6 @@
 function CeYiZhi_Analysis(dataArri,nTrials)
 
-% TO DO：把一致和不一致时的正确率也加进去
+% TO DO：把一致和不一致时的正确率也加进去，改后记得把编数据的程序也改一下
 
 %% 定义处理后的结构数据 1是一致，0是不一致
 dataCalc = struct('num',[],'accuRent',[],...
