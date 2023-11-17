@@ -3,14 +3,15 @@ function CeYiZhi_Analysis(dataArri,nTrials)
 %% 定义处理后的结构数据 1是一致，0是不一致
 dataCalc = struct('num',[],'accuRent',[],...
     'meanRT_1',[],'stdRT_1',[],'meanRT_0',[],'stdRT_0',[],...
-    'nTrials',[],'gender',[],'grade',[],'age',[]);
+    'nTrials',[],'gender',[],'grade',[],'age',[],'hand',[]);
 dataRight = struct('Trial', [], 'Congruency', [], 'RT', []);
 
 %% 获取被试信息
-dataCalc.gender = input('请输入您的性别(男性请输入0/女性请输入1):');
-dataCalc.grade = input('请输入您的年级(23/22/21/...):');% 本实验针对本科生
-dataCalc.age = input('请输入您的年龄(18/19/20/...):');
-dataCalc.num = string(datetime('now','Format','MMddHHmmss'));
+dataCalc.gender = input('请输入您的性别(女性请输入0/男性请输入1):');
+dataCalc.grade = input('请输入您的本科年级(23/22/21/...):');
+dataCalc.age = input('请输入您的当前年龄(18/19/20/...):');
+dataCalc.hand = input('请输入您的惯用手(左手请输入0/右手请输入1):');
+dataCalc.num = string(datetime('now','Format','yyMMddHHmmss'));
 dataCalc.nTrials = nTrials;
 
 %% 处理并保存到变量
