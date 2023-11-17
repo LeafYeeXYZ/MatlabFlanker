@@ -1,10 +1,8 @@
 function CeYiZhi_Analysis(dataArri,nTrials)
 
-% TO DO：把一致和不一致时的正确率也加进去，把全部正确选择的meanRT和stdRT加进去改后记得把编数据的程序也改一下
-
 %% 定义处理后的结构数据 1是一致，0是不一致
-dataCalc = struct('num',[],'accuRent',[],...
-    'meanRT_1',[],'stdRT_1',[],'meanRT_0',[],'stdRT_0',[],...
+dataCalc = struct('num',[],'accuRent',[],'meanRT',[],'stdRT',[],...
+    'accuRent_1',[],'meanRT_1',[],'stdRT_1',[],'accuRent_0',[],'meanRT_0',[],'stdRT_0',[],...
     'nTrials',[],'gender',[],'grade',[],'age',[],'hand',[]);
 dataRight = struct('Trial', [], 'Congruency', [], 'RT', []);
 
@@ -18,8 +16,15 @@ dataCalc.nTrials = nTrials;
 
 %% 处理并保存到变量
 nRight = 0;
+nRight_1 = 0;
+nRight_0 = 0;
 for i = 1:nTrials
     if dataArri(i).Accuracy == 1
+        if dataArri(i).Congruency == 1
+            nRight_1 = nRight_1 + 1;
+        else
+            nRight_0 = nRight_0 + 1;
+        end
         nRight = nRight + 1;% 记录正确次数
         dataRight(nRight).Trial = nRight;
         dataRight(nRight).Congruency = dataArri(i).Congruency;%将正确试次的数据保存到新变量
@@ -27,13 +32,14 @@ for i = 1:nTrials
     end
 end
 
-%% 计算所有正确选择的反应时和标准差
+%% 计算所有正确选择的正确率/反应时均值/标准差
 dataCalc.accuRent = nRight / nTrials;%计算总正确率
+dataCalc.meanRT = mean([dataRight.RT]);%计算总均值
+dataCalc.stdRT = std([dataRight.RT]);%计算总标准差
 
-
-
-
-%% 计算一致和不一致两种情况的反应时的均值和标准差
+%% 计算一致和不一致两种情况的正确率/反应时均值/标准差
+dataCalc.accuRent_1 = nRight_1 / (nTrials/2);%计算一致正确率
+dataCalc.accuRent_0 = nRight_0 / (nTrials/2);%计算不一致正确率
 % 遍历 dataRight 结构体
 RT_1 = zeros(1, length(dataRight));
 RT_0 = zeros(1, length(dataRight));
