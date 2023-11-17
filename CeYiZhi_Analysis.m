@@ -1,6 +1,6 @@
 function CeYiZhi_Analysis(dataArri,nTrials)
 
-% TO DO：把一致和不一致时的正确率也加进去，改后记得把编数据的程序也改一下
+% TO DO：把一致和不一致时的正确率也加进去，把全部正确选择的meanRT和stdRT加进去改后记得把编数据的程序也改一下
 
 %% 定义处理后的结构数据 1是一致，0是不一致
 dataCalc = struct('num',[],'accuRent',[],...
@@ -26,7 +26,12 @@ for i = 1:nTrials
         dataRight(nRight).RT = dataArri(i).RT;
     end
 end
+
+%% 计算所有正确选择的反应时和标准差
 dataCalc.accuRent = nRight / nTrials;%计算总正确率
+
+
+
 
 %% 计算一致和不一致两种情况的反应时的均值和标准差
 % 遍历 dataRight 结构体
